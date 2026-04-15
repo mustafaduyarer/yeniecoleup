@@ -1,0 +1,6 @@
+ekoleupbackend/node_modules/
+ekoleupbackend/dist/
+ekoleupbackend/.env
+ekoleupfrontend/node_modules/
+ekoleupfrontend/.next/
+ekoleupfrontend/.env.local

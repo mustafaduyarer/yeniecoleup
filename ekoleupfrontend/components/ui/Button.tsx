@@ -1,0 +1,12 @@
+import type { ButtonHTMLAttributes } from "react";
+
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+
+export default function Button({ className = "", ...props }: ButtonProps) {
+  return (
+    <button
+      className={`rounded-lg px-4 py-2 font-medium ${className}`}
+      {...props}
+    />
+  );
+}
