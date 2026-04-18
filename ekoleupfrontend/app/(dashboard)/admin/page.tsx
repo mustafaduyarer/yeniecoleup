@@ -1,3 +1,13 @@
+"use client";
+
+import { useLanguage } from "@/lib/i18n/language-context";
+
 export default function AdminPage() {
-  return <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>;
+  const { t } = useLanguage();
+
+  return (
+    <h1 className="text-2xl font-bold text-slate-900">
+      {t.dashboard.adminTitle}
+    </h1>
+  );
 }

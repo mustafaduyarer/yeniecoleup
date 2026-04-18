@@ -26,3 +26,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.hero-clip-top {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 35% 100%);
+}
+
+.hero-clip-bottom {
+  clip-path: polygon(45% 0, 100% 0, 100% 100%, 0 100%);
+}

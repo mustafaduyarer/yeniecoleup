@@ -11,8 +11,12 @@ import {
 import { loginWithFirebaseToken } from "@/features/auth/api/authClient";
 import { persistAuthSession } from "@/lib/auth/client-session";
 import { getFirebaseAuthClient } from "@/lib/firebase/client";
+import { useLanguage } from "@/lib/i18n/language-context";
 
 export default function SignupPage() {
+  const { t } = useLanguage();
+  const copy = t.auth;
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -44,11 +48,8 @@ export default function SignupPage() {
         name: loginResponse.user.name,
       });
       window.location.assign("/");
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Signup failed. Please try again.";
+    } catch {
+      const message = copy.signupFailedFallback;
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -71,11 +72,8 @@ export default function SignupPage() {
         name: loginResponse.user.name,
       });
       window.location.assign("/");
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "Google sign-in failed. Please try again.";
+    } catch {
+      const message = copy.googleFailedFallback;
       setErrorMessage(message);
     } finally {
       setIsSubmitting(false);
@@ -85,15 +83,15 @@ export default function SignupPage() {
   return (
     <main className="min-h-screen bg-[#f9f5f8] px-6 py-20">
       <section className="mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="mb-2 text-2xl font-bold text-slate-900">Sign up</h1>
-        <p className="mb-6 text-sm text-slate-600">
-          Initial onboarding page scaffold.
-        </p>
+        <h1 className="mb-2 text-2xl font-bold text-slate-900">
+          {copy.signupTitle}
+        </h1>
+        <p className="mb-6 text-sm text-slate-600">{copy.onboardingHint}</p>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <input
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
             type="text"
-            placeholder="Full name"
+            placeholder={copy.fullNamePlaceholder}
             value={fullName}
             onChange={(event) => setFullName(event.target.value)}
             required
@@ -101,7 +99,7 @@ export default function SignupPage() {
           <input
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
             type="email"
-            placeholder="Email"
+            placeholder={copy.emailPlaceholder}
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
@@ -109,7 +107,7 @@ export default function SignupPage() {
           <input
             className="w-full rounded-lg border border-slate-300 px-3 py-2"
             type="password"
-            placeholder="Password"
+            placeholder={copy.passwordPlaceholder}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
@@ -120,7 +118,7 @@ export default function SignupPage() {
             disabled={isSubmitting}
             className="w-full rounded-lg bg-[#0058ba] py-2 font-semibold text-white"
           >
-            {isSubmitting ? "Creating account..." : "Create account"}
+            {isSubmitting ? copy.createAccountProgress : copy.createAccount}
           </button>
           {errorMessage ? (
             <p className="text-sm font-medium text-red-600">{errorMessage}</p>
@@ -133,13 +131,13 @@ export default function SignupPage() {
             disabled={isSubmitting}
             className="w-full rounded-lg border border-slate-300 bg-white py-2 font-semibold text-slate-700"
           >
-            {isSubmitting ? "Please wait..." : "Continue with Google"}
+            {isSubmitting ? copy.pleaseWait : copy.googleContinue}
           </button>
         </div>
         <p className="mt-6 text-sm text-slate-600">
-          Already registered?{" "}
+          {copy.alreadyRegistered}{" "}
           <Link className="font-semibold text-[#0058ba]" href="/login">
-            Login
+            {copy.loginCta}
           </Link>
         </p>
       </section>

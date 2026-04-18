@@ -1,3 +1,7 @@
+"use client";
+
+import { useLanguage } from "@/lib/i18n/language-context";
+
 type Plan = {
   name: string;
   price: string;
@@ -7,15 +11,18 @@ type Plan = {
 };
 
 export default function Pricing({ plans }: { plans: Plan[] }) {
+  const { t } = useLanguage();
+  const copy = t.pricing;
+
   return (
     <section id="academics" className="bg-[#0b0d12] px-8 py-24">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 text-center">
           <span className="mb-3 block text-sm font-bold uppercase tracking-[0.2em] text-[#4a8eff]">
-            Our Pricing Plan
+            {copy.badge}
           </span>
           <h2 className="text-4xl font-extrabold text-white lg:text-5xl">
-            Akademik Planlarımız
+            {copy.title}
           </h2>
         </div>
 
@@ -43,7 +50,7 @@ export default function Pricing({ plans }: { plans: Plan[] }) {
                   {plan.price}
                 </span>
                 <span className="mb-2 ml-1 text-2xl text-[#6f7a90]">
-                  /monthly
+                  {copy.monthly}
                 </span>
               </div>
 
@@ -60,7 +67,7 @@ export default function Pricing({ plans }: { plans: Plan[] }) {
               </ul>
 
               <button className="w-full rounded-3xl bg-[#2f333b] py-5 text-center text-2xl font-extrabold tracking-[0.08em] text-white transition hover:bg-[#3a3f48]">
-                GET STARTED
+                {copy.getStarted}
               </button>
             </article>
           ))}
